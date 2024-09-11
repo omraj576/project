@@ -1,0 +1,71 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="cnfbooking">
+    <div class="overview">
+        <h2>Confirm and Pay</h2>
+        <br>
+        <% for(booking of listing.bookings) {%>
+            <h4><b>Your Trip</b></h4><br>
+        <div class="info">
+            <div><h5><b>Dates:</b></h5><p><%= booking.checkIn.toDateString() %>&nbsp;&nbsp;<b>-</b>&nbsp;&nbsp;<%= booking.checkOut.toDateString() %></p></div>
+            <div class="ms-auto"><form action="/listing/<%=listing._id%>/booking/<%=booking._id%>?_method=DELETE" method="post">
+                <button class="btn btn-sm btn-dark">Edit</button>
+            </form></div>
+        </div><br><br>
+        <div class="info">
+            <div><h5><b>Check-in Time:</b></h5><p>10:00 AM to 11:59 AM</p></div>
+            <div class="ms-auto"><form action="/listing/<%=listing._id%>/booking/<%=booking._id%>?_method=DELETE" method="post">
+                <button class="btn btn-sm btn-dark">Edit</button>
+            </form></div>
+        </div><br><br>
+        <div class="info">
+            <div><h5><b>Guests:</b></h5><%= booking.guest %>&nbsp;&nbsp;guest</div>
+            <div class="ms-auto"><form action="/listing/<%=listing._id%>/booking/<%=booking._id%>?_method=DELETE" method="post">
+                <button class="btn btn-sm btn-dark">Edit</button>
+            </form></div>
+        </div><br>
+        <div><a><button class="pay-btn">Pay</button></a></div>
+        
+        
+        
+        
+    </div>
+    <div class="listing-info">
+        <div class="listing-detail">
+            <div class="listing-detail1">
+                <div class="image-card"><img src="<%=listing.image.url %>" alt="image"></div>
+                <div class="ms-2"><h5><%=listing.title %>,&nbsp;&nbsp;<br><%=listing.location %>,<br><%=listing.country %></h5><h6>Superhost</h6><br><br></div> 
+            </div>
+            <div class="listing-detail2">
+                <div>
+                    <b><h4>Price Details</h4></b>
+                    <p>&#8377;<%=listing.price %>&nbsp;X&nbsp;<%=((booking.checkOut)-(booking.checkIn))/86400000 %>&nbsp;night</p>
+                    <p>Taxes</p>
+                </div>
+                <div class="ms-auto">
+                    <br>
+                    <p>&#8377;<%=(((booking.checkOut)-(booking.checkIn))/86400000)*booking.guest*listing.price%></p>
+                    <p></p>
+                    <p>&#8377;<%=((((booking.checkOut)-(booking.checkIn))/86400000)*booking.guest*listing.price)*0.18%></p>
+                </div>
+            </div>
+            <hr>
+            <div class="price-info">
+                <div>
+                    <P>Total(INR)</P>
+                </div>
+                <div class="ms-auto">
+                    <p>&#8377;<%=((((booking.checkOut)-(booking.checkIn))/86400000)*booking.guest*listing.price)+(((((booking.checkOut)-(booking.checkIn))/86400000)*booking.guest*listing.price)*0.18)%></p>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+    <% } %>
+</div>
+<script>
+    function date(checkIn,checkOut){
+        let day = (checkOut - checkIn) / 86_400_000;
+    }
+</script>

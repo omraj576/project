@@ -1,0 +1,354 @@
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.container{
+    flex: 1;
+}
+.navbar{
+    height: 5rem;
+    background-color: white;
+}
+.fa-rocket{
+    color: #fe424d;
+    font-size: 2rem;
+}
+.nav-link{
+    color: #222222 !important;
+    
+}
+
+
+.f-info-links a{
+    text-decoration:none;
+    color: #222222;
+}
+.f-info-links a:hover{
+    text-decoration:underline;
+}
+.f-info{
+    height: 8rem;
+    background-color: rgb(162, 159, 159);
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: space-evenly;
+    text-align: center;
+    vertical-align: middle;
+}
+.f-info-links,.f-info-socials,.f-info-brand {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+.f-info-socials i{
+    font-size: 1.4rem;
+    margin-right: 1rem;
+    
+}
+.card{
+    border: none !important;
+    margin-bottom: 2rem;
+}
+.card-img-top{
+    border-radius: 1rem !important;
+    width: 100% !important;
+    object-fit: cover !important;
+    height: 20rem !important;
+
+}
+.card-body{
+    padding: 0 !important;
+    
+
+}
+.card-text p{
+    font-weight: 400;
+}
+.listing-link{
+    text-decoration: none !important;
+}
+.card-img-overlay{
+    opacity: 0;
+}
+.card-img-overlay:hover{
+    opacity: 1;
+    
+}
+.btns{
+    display: flex;
+    margin-bottom: 10px;
+}
+.sign1{
+    height: 40px;
+    width: 85px;
+    border: 1px solid rgb(255, 0, 0) !important;
+    border-radius: 20px;
+    padding-left: 15px !important;
+    
+    margin-left: 10px;
+}
+.sign1:hover{
+    background-color: #f02835 !important;
+    color: white !important;
+}
+.listhome{
+    border-radius: 20px;
+}
+.listhome:hover{
+    border-radius: 20px;
+    background-color: #d8d6d6;
+}
+#filters{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+.filter{
+    text-align: center;
+    margin-left: 31px;
+    opacity: 0.7;
+}
+.filter:hover{
+    opacity: 1;
+}
+.tax-toggle{
+    height: 50px;
+    width: 220px;
+    margin-left: 1rem;
+    border: 1px solid rgb(139, 134, 134);
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.tax-toggle:hover{
+    background-color: rgb(219, 216, 216);
+}
+#flexSwitchCheckDefault{
+    height: 23px !important;
+    width: 45px !important;
+    margin-left: 10px;
+    
+}
+.text{
+    font-size: 19px;
+}
+.filter-btn{
+    height: 50px;
+    width: 70px;
+    border: 1px solid rgb(139, 134, 134);
+    border-radius: 12px;
+    margin-left: 10px;
+}
+.filter-btn:hover{
+    background-color: rgb(219, 216, 216);
+}
+.icon i{
+    margin-left: 22px;
+    opacity: 0.7;
+}
+.filter-btn p{
+    text-align: center;
+}
+.tax-info{
+    display: none;
+}
+.search{
+    margin-left: 400px !important;
+}
+.btn-search{
+    height: 40px;
+    width: 40px;
+    background-color: #fe424d !important;
+    color: white !important;
+    border-radius: 50% !important;
+}
+.btn-search:hover{
+    background-color: #ec1120 !important;
+    color: white ;
+}
+.inp-btn{
+    border-radius: 20px !important;
+}
+.fav i{
+    font-size: 22px;
+}
+.fav i:hover{
+    color: #ff0011;
+    opacity: 1 !important;
+
+}
+.share i{
+    font-size: 22px;
+}
+.sharep{
+    display: none;
+}
+.share i:hover+.sharep{
+    display: block;
+    color: rgb(255, 255, 255);
+}
+.test{
+    display: flex;
+    flex-wrap: wrap;
+}
+.test1{
+    width: 530px;
+}
+.test2{
+    width: 320px;
+    background-color: #f8f4f4d3;
+    border: 2px solid rgb(139, 138, 138);
+    margin-top: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 1px 1px 3px 2px #dfdddd;
+}
+.price{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+.price-cut{
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: line-through;
+    margin-left: 20px;
+    color: #575555;
+}
+.price-org{
+    font-size: 20px;
+    margin-left: 12px;
+}
+
+.in{
+    margin-right: 1px;
+}
+.check{
+    width: 295px;
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 10px;
+    margin-left: 10px;
+    margin-top: 30px;
+}
+.in input{
+    margin-bottom: 10px;
+    margin-left: 3px;
+    height: 30px;
+    background-color: #f8f4f4d3;
+    border: 0.2px solid rgb(140, 137, 137);
+    border-radius: 5px;
+}
+.in p{
+    margin-left: 5px;
+}
+.out{
+    /* border: 0.5px solid brown; */
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-left: 1px solid brown;
+}
+
+.out input{
+    margin-bottom: 10px;
+    margin-left: 4px;
+    height: 30px;
+    background-color: #f8f4f4d3;
+    border: 0.2px solid rgb(140, 137, 137);
+    border-radius: 5px;
+}
+.person{
+    width: 297px;
+    height: 40px;
+    border: 1px solid rgb(0, 0, 0);
+    margin-left: 10px;
+    margin-top: 40px;
+    border-radius: 5px;
+}
+.person select{
+    background-color: #f8f4f4d3;
+}
+.btn-book{
+    height: 45px;
+    width: 295px;
+    margin-top: 30px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    color: #ffffff;
+    background-color: #fe424d;
+    border: none;
+}
+.btn-book:hover{
+    background-color: #ff0011;
+}
+.cnfbooking{
+    display: flex;
+    flex-wrap: wrap;
+}
+.overview{
+    width: 50%;
+    height: 500px;
+}
+.listing-info{
+    width: 50%;
+    height: 500px;
+}
+.info{
+    display: flex;
+    flex-wrap: wrap;
+}
+.pay-btn{
+    height: 40px;
+    width: 620px;
+    background-color: #fe424d;
+    color: white;
+    border-radius: 10px;
+    border: none;
+}
+.image-card img{
+    height: 100px;
+    width: 100px;
+    border-radius: 10px;
+}
+.listing-detail{
+    width: 550px;
+    border: 1px solid rgba(0, 0, 0, 0.821);
+    margin-left: 100px;
+    margin-top: 100px;
+    border-radius: 10px;
+}
+.listing-detail1{
+    display: flex;
+    flex-wrap: wrap;
+    border-bottom: 1px solid black;
+    margin-top: 15px;
+    margin-left: 15px;
+    margin-right: 15px;
+
+}
+.listing-detail2{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 15px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+.price-det{
+    display: flex;
+    flex-wrap: wrap;
+}
+.price-info{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 15px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+
