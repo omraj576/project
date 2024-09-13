@@ -27,7 +27,7 @@ module.exports.login = (req,res)=>{
 
 module.exports.loginValidate = async(req,res)=>{
     req.flash("success","welcome to wonderlust you logged in");
-    let redirectUrl=res.locals.redirectUrl || "/listing";
+    const redirectUrl = res.locals.redirectUrl || "/listing";
     res.redirect(redirectUrl);
 
 }

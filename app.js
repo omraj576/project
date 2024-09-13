@@ -21,6 +21,7 @@ const User = require("./models/user.js");
 const users = require("./routes/user.js");
 const Booking = require("./models/booking.js");
 const { IsLoggedIn,saveUrl } = require('./middleware.js');
+const wrapAsync = require('./utils/wrapAsync.js');
 
 
 
@@ -97,21 +98,19 @@ app.use("/listing/:id/reviews",reviews);
 
 app.use("/",users);
 
-
-app.post("/listing/:id/booking" ,saveUrl,IsLoggedIn,async(req,res)=>{
+app.post("/listing/:id/booking" ,IsLoggedIn,wrapAsync(async(req,res)=>{
     let listing = await Listing.findById(req.params.id);
     const newBooking = new Booking(req.body.booking);
     newBooking.bookedBy=req.user;
     newBooking.listingId = listing.id;
     listing.bookings.push(newBooking);
     console.log(newBooking);
-    console.log(listing.id);
     let nwbook = await newBooking.save();
-    // let redirectUrl=res.locals.redirectUrl || "/listing";
-    // res.redirect(redirectUrl);
     res.render("listings/booking.ejs",{nwbook,listing});
-});
-app.delete("/listing/:id/booking/:bookingId",IsLoggedIn,async(req,res)=>{
+}));
+
+
+app.delete("/listing/:id/booking/:bookingId",async(req,res)=>{
     let {id,bookingId} = req.params;
     await Listing.findByIdAndUpdate(id,{$pull:{bookings:bookingId}});
     await Booking.findByIdAndDelete(bookingId);
