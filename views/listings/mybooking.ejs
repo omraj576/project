@@ -1,0 +1,22 @@
+<% layout("/layouts/boilerplate") %>
+    <% for ( Booking of allBooking) { %>
+      <% for ( Listing of allListing) { %>
+        <% if(currUser && currUser._id.equals(Booking.bookedBy._id)){%>
+          <% if(Listing && Listing._id.equals(Booking.listingId._id)){%>
+          <div class="main-book">
+            <div class="mybooking">
+              <h4><%=Listing.title %></h4>
+                <p><b>Check-In</b>&nbsp;<b>-</b>&nbsp;<%=Booking.checkIn.toDateString() %></p>
+                <p><b>Check-Out</b>&nbsp;<b>-</b>&nbsp;<%=Booking.checkOut.toDateString() %></p>
+                <p><b>Guest</b>&nbsp;<b>-</b>&nbsp;<%=Booking.guest %></p>
+                <p><b>Total(INR)</b>&nbsp;<b>-</b>&nbsp;&#8377;<%=((((Booking.checkOut)-(Booking.checkIn))/86400000)*Booking.guest*Listing.price)+(((((Booking.checkOut)-(Booking.checkIn))/86400000)*Booking.guest*Listing.price)*0.18)%></p>
+            </div>
+            <div class="mybooking ms-auto">
+                  <img src="<%=Listing.image.url %>">
+                  <% } %>
+                  <% } %>
+            </div>
+          </div>
+            
+        <% } %>
+      <% } %>

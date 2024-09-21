@@ -3,6 +3,7 @@ const listing = require("../models/listing.js");
 const initData = require("./data.js");
 
 
+
 main().then(()=>{
     console.log("connected to db");
 })

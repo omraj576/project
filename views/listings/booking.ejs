@@ -7,7 +7,7 @@
         <% for(booking of listing.bookings) {%>
             <h4><b>Your Trip</b></h4><br>
         <div class="info">
-            <div><h5><b>Dates:</b></h5><p><%= booking.checkIn.toDateString() %>&nbsp;&nbsp;<b>-</b>&nbsp;&nbsp;<%= booking.checkOut.toDateString() %></p></div>
+            <div><h5><b>Dates:</b></h5><p><%=booking.checkIn ? booking.checkOut.toDateString() : 'Check-in date not available'%>&nbsp;&nbsp;<b>-</b>&nbsp;&nbsp;<%= booking.checkOut ? booking.checkOut.toDateString() : 'Check-in date not available'%></p></div>
             <div class="ms-auto"><form action="/listing/<%=listing._id%>/booking/<%=booking._id%>?_method=DELETE" method="post">
                 <button class="btn btn-sm btn-dark">Edit</button>
             </form></div>
@@ -24,7 +24,7 @@
                 <button class="btn btn-sm btn-dark">Edit</button>
             </form></div>
         </div><br>
-        <div><a><button class="pay-btn">Pay</button></a></div>
+        <div><a href="/listing"><button class="pay-btn">Pay</button></a></div>
         
         
         
@@ -64,8 +64,3 @@
     </div>
     <% } %>
 </div>
-<script>
-    function date(checkIn,checkOut){
-        let day = (checkOut - checkIn) / 86_400_000;
-    }
-</script>

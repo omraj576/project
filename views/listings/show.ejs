@@ -1,4 +1,8 @@
 <% layout("/layouts/boilerplate") %>
+<script>
+    let mapToken = "<%=process.env.MAP_BOX %>";
+    let mapcoordinates = <%- JSON.stringify(listing.geometry.coordinates) %>;
+</script>
 
     <div class="row">
         <div class="col-6 offset-2">
@@ -47,16 +51,9 @@
                         </form>
                     </div>
                 </div>
+
+
                 
-                <!-- <div class="card-body row1">
-                    <div class="desc">
-                        
-                    </div>
-                    <div class="card text-center mb-3" style="width: 18rem;">
-                        
-                    </div>
-                    
-                </div> -->
         </div>
     </div>
     <% if(currUser && currUser._id.equals(listing.owner._id)){%>
@@ -103,8 +100,9 @@
         </form>
         <% } %>
         <hr/>
-        <h4>All review</h4>
+        <% if(listing.reviews.length>0) { %>
         <div class="row">
+            <h4>All review</h4>
             <% for(review of listing.reviews) {%>
                 <div class="card">
                     <h5><%=review.author.username %></h5>
@@ -121,8 +119,15 @@
             <%}%>
             
         </div>
+        <% } %>
+        <hr>
+        <div class="col-8 offset-2"></div>
+            <h3>Where you'll be</h3>
+            <div id="map"></div>
+        </div>
         
     </div>
-    
 </div>
+<script src="/js/map.js"></script>
+
 

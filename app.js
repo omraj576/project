@@ -14,6 +14,7 @@ const ExpressError = require("./utils/ExpressError");
 const listings = require("./routes/listing.js");
 const reviews = require("./routes/review.js");
 const session = require("express-session");
+const MongoStore = require("connect-mongo");
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStartegy = require("passport-local");
@@ -24,7 +25,7 @@ const { IsLoggedIn,saveUrl } = require('./middleware.js');
 const wrapAsync = require('./utils/wrapAsync.js');
 
 
-
+const dbUrl = process.env.ATLASDB_URL;
 
 
 
@@ -34,7 +35,7 @@ main().then(()=>{
 .catch(err => console.log(err));
 
 async function main() {
-  await mongoose.connect('mongodb://127.0.0.1:27017/Wonderlust');
+  await mongoose.connect(dbUrl);
 
 };
 
@@ -45,17 +46,21 @@ app.use(methodOverride("_method"));
 app.engine("ejs",ejsMate);
 app.use(express.static(path.join(__dirname,"/public")));
 
-// const store = MongoStore.create(
-//     {
-//         mongoUrl:dbUrl,
-//         crypto:{
-//             secret:process.env.SECRET,
-//         },
-//         touchAfter:24*3600,
-//     });
+const store = MongoStore.create(
+    {
+        mongoUrl:dbUrl,
+        crypto:{
+            secret:process.env.SECRET,
+        },
+        touchAfter:24*3600,
+    });
 
+    store.on("error",()=>{
+        console.log("error in mongoSession ",err)
+    })
 
 const sessionOption ={
+    store,
     secret:process.env.SECRET,
     resave:false,
     saveUninitialized:true,
@@ -98,46 +103,34 @@ app.use("/listing/:id/reviews",reviews);
 
 app.use("/",users);
 
-app.post("/listing/:id/booking" ,IsLoggedIn,wrapAsync(async(req,res)=>{
+
+app.post("/listing/:id/booking" ,IsLoggedIn,async(req,res)=>{
     let listing = await Listing.findById(req.params.id);
     const newBooking = new Booking(req.body.booking);
     newBooking.bookedBy=req.user;
     newBooking.listingId = listing.id;
     listing.bookings.push(newBooking);
-    console.log(newBooking);
     let nwbook = await newBooking.save();
     res.render("listings/booking.ejs",{nwbook,listing});
-}));
+});
 
 
-app.delete("/listing/:id/booking/:bookingId",async(req,res)=>{
+app.delete("/listing/:id/booking/:bookingId",IsLoggedIn,async(req,res)=>{
     let {id,bookingId} = req.params;
     await Listing.findByIdAndUpdate(id,{$pull:{bookings:bookingId}});
     await Booking.findByIdAndDelete(bookingId);
 
     res.redirect(`/listing/${id}`);
+});
+
+app.get("/bookings",async(req,res)=>{
+    let allBooking = await Booking.find({});
+    let userid = await User.find({});
+    let allListing = await Listing.find({});
+    res.render("listings/mybooking.ejs",{allBooking,userid,allListing});
+    
 })
 
-// const alllistingshow = async(req,res)=>{
-//     try{
-//         var search = '';
-//         if(req.query.search){
-//             search = req.query.search
-
-//         }
-//         const searchListing = await Listing.find({
-//             $or:[
-//                 {title:{$regex:'.*'+search+'.*',$option:'i'}},
-//                 {description:{$regex:'.*'+search+'.*',$option:'i'}},
-//                 {price:{$regex:'.*'+search+'.*',$option:'i'}},
-//                 {location:{$regex:'.*'+search+'.*',$option:'i'}},
-//                 {country:{$regex:'.*'+search+'.*',$option:'i'}}
-//             ]
-//         })
-//     }catch(err){
-//         console.log(err.message);
-//     }
-// }
 
 
 
